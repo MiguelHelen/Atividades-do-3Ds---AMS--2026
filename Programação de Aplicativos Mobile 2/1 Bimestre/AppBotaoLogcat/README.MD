@@ -76,9 +76,9 @@ Cada botão possui uma cor diferente para facilitar a identificação da ação 
 ### Interface do aplicativo
 
 
-```
+
 ![Screenshot da aplicação](./imagens/1.png)
-```
+
 
 ---
 
@@ -86,9 +86,9 @@ Cada botão possui uma cor diferente para facilitar a identificação da ação 
 
 
 
-```
+
 ![Screenshot da aplicação](./imagens/2.png)
-```
+
 
 ---
 
