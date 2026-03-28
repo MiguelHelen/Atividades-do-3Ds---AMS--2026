@@ -6,7 +6,7 @@ Este projeto foi desenvolvido como atividade da disciplina de **Programação de
 
 O objetivo da atividade é criar um aplicativo Android utilizando **Kotlin e Jetpack Compose**, contendo **quatro botões** que registram mensagens diferentes no **Logcat** do Android Studio.
 
-Cada botão representa um nível de log utilizado no desenvolvimento Android para depuração e monitoramento do funcionamento do aplicativo.
+Cada botão representa um nível de Avaliação para um Restaurante
 
 ---
 
@@ -14,7 +14,7 @@ Cada botão representa um nível de log utilizado no desenvolvimento Android par
 
 Criar um aplicativo simples que demonstre o uso de diferentes tipos de **logs no Android**, permitindo visualizar mensagens no **Logcat** ao clicar nos botões da interface.
 
-Os níveis de log utilizados foram:
+Os níveis de Botões utilizados foram:
 
 * **Pessimo**
 * **Ruim**
