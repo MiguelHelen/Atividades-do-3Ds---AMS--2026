@@ -16,10 +16,10 @@ Criar um aplicativo simples que demonstre o uso de diferentes tipos de **logs no
 
 Os níveis de log utilizados foram:
 
-* **DEBUG**
-* **INFO**
-* **WARNING**
-* **ERROR**
+* **Pessimo**
+* **Ruim**
+* **Bom**
+* **Excelente**
 
 ---
 
@@ -36,12 +36,12 @@ Os níveis de log utilizados foram:
 
 O aplicativo possui **quatro botões**, cada um responsável por gerar um tipo diferente de mensagem no Logcat.
 
-| Botão   | Função                          |
-| ------- | ------------------------------- |
-| DEBUG   | Envia uma mensagem de depuração |
-| INFO    | Envia uma mensagem informativa  |
-| WARNING | Envia um aviso                  |
-| ERROR   | Simula um erro no aplicativo    |
+| Botão     | Função                                 |
+| --------- | -------------------------------------- |
+| Péssimo   | Avaliação Péssima para o Restaurante   |
+| Ruim      | Avaliação Ruim para o Restaurante      |
+| Bom       | Avaliação Boa para o Restaurante       |
+| Excelente | Avaliação Excelente para o Restaurante |
 
 Quando o usuário pressiona um botão, uma mensagem correspondente é exibida no **Logcat**, permitindo ao desenvolvedor acompanhar o comportamento do aplicativo.
 
