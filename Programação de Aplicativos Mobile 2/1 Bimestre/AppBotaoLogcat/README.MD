@@ -77,7 +77,7 @@ Cada botão possui uma cor diferente para facilitar a identificação da ação 
 
 
 
-![Screenshot da aplicação](./imagens/1.png)
+![Screenshot da aplicação](./imagens/img1.png)
 
 
 ---
@@ -87,7 +87,7 @@ Cada botão possui uma cor diferente para facilitar a identificação da ação 
 
 
 
-![Screenshot da aplicação](./imagens/2.png)
+![Screenshot da aplicação](./imagens/img2.png)
 
 
 ---
