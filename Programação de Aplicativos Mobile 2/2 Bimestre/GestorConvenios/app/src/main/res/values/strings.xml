@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Gestor Convênios</string>
+    <string name="titulo_lista">Convênios de Saúde</string>
+    <string name="titulo_cadastro">Novo Convênio</string>
+    <string name="titulo_edicao">Editar Convênio</string>
+    <string name="titulo_detalhe">Detalhes do Convênio</string>
+    <string name="btn_salvar">Salvar</string>
+    <string name="btn_cancelar">Cancelar</string>
+    <string name="btn_excluir">Excluir</string>
+    <string name="btn_editar">Editar</string>
+    <string name="btn_adicionar_doc">Adicionar Documento</string>
+    <string name="campo_obrigatorio">Campo obrigatório</string>
+    <string name="convenio_salvo">Convênio salvo com sucesso!</string>
+    <string name="convenio_excluido">Convênio excluído.</string>
+    <string name="nenhum_convenio">Nenhum convênio cadastrado ainda.</string>
+    <string name="confirmar_exclusao">Deseja excluir este convênio?</string>
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
+</resources>
