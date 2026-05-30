@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import com.example.gestorconvenios.R
 
 class DetalheConvenioActivity : AppCompatActivity() {
 
@@ -81,34 +80,19 @@ class DetalheConvenioActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.tvObservacoes).text =
             convenio.observacoes.ifEmpty { "Sem observações" }
 
-        val btnAbrirDoc = findViewById<Button>(R.id.btnAbrirDoc)
+        // Documento URI — só exibe o caminho, sem botão de abrir
         val tvDocUri = findViewById<TextView>(R.id.tvDocUri)
+        val btnAbrirDoc = findViewById<Button>(R.id.btnAbrirDoc)
+
+        btnAbrirDoc.visibility = View.GONE
 
         if (convenio.documentoUri.isNotEmpty()) {
             val uri = Uri.parse(convenio.documentoUri)
             val nomeArquivo = uri.lastPathSegment ?: convenio.documentoUri
             tvDocUri.text = "📎 $nomeArquivo\n\n🔗 URI: ${convenio.documentoUri}"
             tvDocUri.setTextColor(getColor(R.color.text_primary))
-            btnAbrirDoc.visibility = View.VISIBLE
-
-            btnAbrirDoc.setOnClickListener {
-                try {
-                    val intent = Intent(Intent.ACTION_VIEW).apply {
-                        setDataAndType(uri, contentResolver.getType(uri) ?: "*/*")
-                        addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                    }
-                    startActivity(intent)
-                } catch (e: Exception) {
-                    Toast.makeText(
-                        this,
-                        "Não foi possível abrir o documento.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
         } else {
             tvDocUri.text = "Nenhum documento vinculado"
-            btnAbrirDoc.visibility = View.GONE
         }
     }
 }

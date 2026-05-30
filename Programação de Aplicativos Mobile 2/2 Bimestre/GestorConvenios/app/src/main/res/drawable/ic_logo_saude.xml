@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Fundo circular branco -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,54m-54,0a54,54 0,1 1,108 0a54,54 0,1 1,-108 0"/>
+
+    <!-- Cruz médica azul -->
+    <path
+        android:fillColor="#1565C0"
+        android:pathData="M68,40L60,40L60,32A4,4 0,0 0,56 28L52,28A4,4 0,0 0,48 32L48,40L40,40A4,4 0,0 0,36 44L36,48A4,4 0,0 0,40 52L48,52L48,60A4,4 0,0 0,52 64L56,64A4,4 0,0 0,60 60L60,52L68,52A4,4 0,0 0,72 48L72,44A4,4 0,0 0,68 40Z"/>
+
+    <!-- Linha do coração (pulso) -->
+    <path
+        android:strokeColor="#00897B"
+        android:strokeWidth="3"
+        android:fillColor="#00000000"
+        android:pathData="M28,76 L36,76 L40,68 L46,82 L52,72 L56,76 L80,76"/>
+
+</vector>

@@ -1,22 +1,63 @@
 package com.example.gestorconvenios
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.*
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-import com.example.gestorconvenios.R
 
 class CadastroConvenioActivity : AppCompatActivity() {
 
     private lateinit var dbHelper: DatabaseHelper
     private var documentoUri: String = ""
     private var convenioId: Long = -1
-    private val PICK_FILE_REQUEST = 100
+
+    // Launcher moderno para selecionar arquivo
+    private val selecionarArquivo = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            result.data?.data?.let { uri ->
+                try {
+                    contentResolver.takePersistableUriPermission(
+                        uri, Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    )
+                } catch (e: Exception) {
+                    // ignora se não conseguir persistir
+                }
+                documentoUri = uri.toString()
+                val nome = uri.lastPathSegment ?: uri.toString()
+                findViewById<TextView>(R.id.tvDocumentoUri).text = "Arquivo: $nome"
+            }
+        }
+    }
+
+    // Launcher para pedir permissão
+    private val pedirPermissao = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        val concedida = permissions.values.any { it }
+        if (concedida) {
+            abrirSeletorArquivo()
+        } else {
+            Toast.makeText(
+                this,
+                "Permissão negada. Não é possível acessar arquivos.",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,15 +70,18 @@ class CadastroConvenioActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         toolbar.setNavigationOnClickListener { finish() }
 
+        // Spinner de status
         val spinner = findViewById<Spinner>(R.id.spinnerStatus)
         val statusList = listOf("Ativo", "Inativo", "Pendente", "Em Análise")
         val spinnerAdapter = ArrayAdapter(
-            this,
-            android.R.layout.simple_spinner_item,
-            statusList
+            this, android.R.layout.simple_spinner_item, statusList
         )
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = spinnerAdapter
+
+        // Máscara de data nos dois campos
+        aplicarMascaraData(findViewById(R.id.etDataInicio))
+        aplicarMascaraData(findViewById(R.id.etDataVencimento))
 
         if (convenioId != -1L) {
             toolbar.title = "Editar Convênio"
@@ -45,21 +89,91 @@ class CadastroConvenioActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.btnSelecionarDoc).setOnClickListener {
-            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
-                addCategory(Intent.CATEGORY_OPENABLE)
-                type = "*/*"
-                putExtra(
-                    Intent.EXTRA_MIME_TYPES,
-                    arrayOf("application/pdf", "image/*")
-                )
-            }
-            startActivityForResult(intent, PICK_FILE_REQUEST)
-
+            verificarPermissaoEAbrir()
         }
 
         findViewById<Button>(R.id.btnSalvar).setOnClickListener {
             salvarConvenio()
         }
+    }
+
+    // Máscara DD/MM/AAAA
+    private fun aplicarMascaraData(campo: TextInputEditText) {
+        campo.addTextChangedListener(object : TextWatcher {
+            private var editando = false
+            private var deletando = false
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                deletando = after < count
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                if (editando || s == null) return
+                editando = true
+
+                // Remove tudo que não for número
+                val digits = s.toString().replace("[^0-9]".toRegex(), "")
+
+                val formatado = StringBuilder()
+                for (i in digits.indices) {
+                    if (i == 2 || i == 4) formatado.append("/")
+                    if (i >= 8) break
+                    formatado.append(digits[i])
+                }
+
+                campo.setText(formatado)
+                campo.setSelection(formatado.length)
+
+                editando = false
+            }
+        })
+    }
+
+    private fun verificarPermissaoEAbrir() {
+        when {
+            // Android 13+ (API 33+)
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU -> {
+                val permissoes = arrayOf(
+                    Manifest.permission.READ_MEDIA_IMAGES
+                )
+                val todas = permissoes.all {
+                    ContextCompat.checkSelfPermission(this, it) ==
+                            PackageManager.PERMISSION_GRANTED
+                }
+                if (todas) abrirSeletorArquivo()
+                else pedirPermissao.launch(permissoes)
+            }
+            // Android 10–12 (API 29–32)
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q -> {
+                abrirSeletorArquivo()
+            }
+            // Android 7–9 (API 24–28)
+            else -> {
+                val permissao = Manifest.permission.READ_EXTERNAL_STORAGE
+                if (ContextCompat.checkSelfPermission(this, permissao) ==
+                    PackageManager.PERMISSION_GRANTED
+                ) {
+                    abrirSeletorArquivo()
+                } else {
+                    pedirPermissao.launch(arrayOf(permissao))
+                }
+            }
+        }
+    }
+
+    private fun abrirSeletorArquivo() {
+        val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
+            type = "*/*"
+            putExtra(
+                Intent.EXTRA_MIME_TYPES,
+                arrayOf("application/pdf", "image/jpeg", "image/png")
+            )
+            addCategory(Intent.CATEGORY_OPENABLE)
+            putExtra(Intent.EXTRA_LOCAL_ONLY, true)
+        }
+        selecionarArquivo.launch(Intent.createChooser(intent, "Selecionar documento"))
     }
 
     private fun carregarDados(id: Long) {
@@ -81,21 +195,7 @@ class CadastroConvenioActivity : AppCompatActivity() {
         if (convenio.documentoUri.isNotEmpty()) {
             documentoUri = convenio.documentoUri
             val nome = Uri.parse(documentoUri).lastPathSegment ?: documentoUri
-            findViewById<TextView>(R.id.tvDocumentoUri).text = "📎 $nome"
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == PICK_FILE_REQUEST && resultCode == Activity.RESULT_OK) {
-            data?.data?.let { uri ->
-                contentResolver.takePersistableUriPermission(
-                    uri, Intent.FLAG_GRANT_READ_URI_PERMISSION
-                )
-                documentoUri = uri.toString()
-                val nome = uri.lastPathSegment ?: uri.toString()
-                findViewById<TextView>(R.id.tvDocumentoUri).text = "📎 $nome"
-            }
+            findViewById<TextView>(R.id.tvDocumentoUri).text = "Arquivo: $nome"
         }
     }
 
