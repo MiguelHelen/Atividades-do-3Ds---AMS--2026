@@ -103,7 +103,7 @@ Dispositivo físico com Android 7.0+ ou emulador configurado
 
 Passo a passo
  1. Clone o repositório
-bashgit clone https://github.com/seu-usuario/GestorConvenios.git
+bashgit clone https://github.com/MiguelHelen/GestorConvenios.git
  2. Abra o projeto no Android Studio
 File > Open > selecione a pasta GestorConvenios
  3. Aguarde a sincronização do Gradle
