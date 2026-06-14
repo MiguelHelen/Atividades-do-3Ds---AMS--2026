@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 class EventController extends Controller
 {
     /**
-     * RF04 - Listagem de eventos do organizador (apenas os seus, paginado)
+     * RF04 - Listagem de eventos do organizador 
      */
     public function index()
     {
@@ -46,7 +46,7 @@ class EventController extends Controller
 
         unset($validated['banner']);
 
-        // RN07 - Vínculo automático ao usuário autenticado (não confia em input oculto)
+        // RN07 - Vínculo automático ao usuário autenticado 
         $validated['user_id'] = auth()->id();
 
         Event::create($validated);
@@ -76,7 +76,7 @@ class EventController extends Controller
         $validated = $this->validateEvent($request, $evento);
 
         if ($request->hasFile('banner')) {
-            // Remove o banner antigo para não acumular arquivos órfãos
+            
             if ($evento->banner_path) {
                 Storage::disk('public')->delete($evento->banner_path);
             }

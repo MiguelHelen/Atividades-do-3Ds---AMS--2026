@@ -41,7 +41,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Eventos criados por este usuário (quando organizador)
+     * Eventos criados por este usuário 
      */
     public function events()
     {
@@ -49,7 +49,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Eventos em que este usuário está inscrito (quando participante)
+     * Eventos em que este usuário está inscrito 
      */
     public function inscricoes()
     {

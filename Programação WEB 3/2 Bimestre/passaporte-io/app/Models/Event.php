@@ -67,7 +67,7 @@ class Event extends Model
     }
 
     /**
-     * Caminho público do banner (ou imagem padrão)
+     * Caminho público do banner 
      */
     public function bannerUrl(): string
     {
@@ -77,7 +77,7 @@ class Event extends Model
     }
 
     /**
- * Verifica se o evento foi criado há menos de 3 horas (badge "Novidade")
+ * Verifica se o evento foi criado há menos de 3 horas 
  */
 public function isNovo(): bool
 {

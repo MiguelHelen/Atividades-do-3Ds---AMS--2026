@@ -28,8 +28,7 @@ class InscricaoController extends Controller
     {
         $user = auth()->user();
 
-        // RN06 - Organizador não pode se inscrever (middleware 'participante' já bloqueia,
-        // mas reforçamos aqui como segunda camada de defesa)
+        // RN06 - Organizador não pode se inscrever 
         if (!$user->isParticipante()) {
             return back()->with('error', 'Apenas participantes podem se inscrever em eventos.');
         }

@@ -6,11 +6,11 @@ use App\Http\Controllers\EventoController;
 use App\Http\Controllers\InscricaoController;
 use Illuminate\Support\Facades\Route;
 
-// ===== Vitrine Pública =====
+
 Route::get('/', [EventoController::class, 'index'])->name('home');
 Route::get('/eventos/{evento}', [EventoController::class, 'show'])->name('eventos.show');
 
-// ===== Auth =====
+
 Route::middleware('guest')->group(function () {
     Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
     Route::post('/register', [AuthController::class, 'register'])->name('register.post');
@@ -22,7 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
-// ===== Backoffice do Organizador =====
+
 Route::middleware(['auth', 'organizador'])
     ->prefix('admin')
     ->name('admin.')
@@ -30,7 +30,7 @@ Route::middleware(['auth', 'organizador'])
         Route::resource('eventos', EventController::class)->except(['show']);
     });
 
-// ===== Motor de Inscrições =====
+
 Route::middleware(['auth', 'participante'])->group(function () {
     Route::get('/minhas-inscricoes', [InscricaoController::class, 'index'])->name('inscricoes.index');
     Route::post('/eventos/{evento}/inscrever', [InscricaoController::class, 'store'])->name('inscricoes.store');
