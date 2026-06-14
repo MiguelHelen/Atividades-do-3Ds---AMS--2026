@@ -1,0 +1,40 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+@theme {
+    --color-primary-glow: #6366f1;
+}
+
+[data-theme="passaporte"] {
+    color-scheme: light;
+    --color-base-100: oklch(98% 0.01 240);
+    --color-base-200: oklch(95% 0.01 240);
+    --color-base-300: oklch(90% 0.01 240);
+    --color-base-content: oklch(20% 0.02 240);
+    --color-primary: oklch(58% 0.18 270);
+    --color-primary-content: oklch(98% 0.01 270);
+    --color-secondary: oklch(70% 0.15 200);
+    --color-secondary-content: oklch(15% 0.02 200);
+    --color-accent: oklch(75% 0.18 330);
+    --color-accent-content: oklch(15% 0.02 330);
+    --color-neutral: oklch(25% 0.02 240);
+    --color-neutral-content: oklch(95% 0.01 240);
+    --color-info: oklch(70% 0.15 230);
+    --color-success: oklch(70% 0.18 145);
+    --color-warning: oklch(80% 0.18 80);
+    --color-error: oklch(65% 0.22 25);
+    --radius-selector: 1rem;
+    --radius-field: 0.75rem;
+    --radius-box: 1.25rem;
+}
+
+.bg-hero-gradient {
+    background-image: linear-gradient(135deg, oklch(58% 0.18 270) 0%, oklch(70% 0.15 200) 50%, oklch(75% 0.18 330) 100%);
+}
+
+.text-hero-gradient {
+    background-image: linear-gradient(135deg, oklch(58% 0.18 270) 0%, oklch(70% 0.15 200) 50%, oklch(75% 0.18 330) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
