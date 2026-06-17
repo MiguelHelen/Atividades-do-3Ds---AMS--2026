@@ -2,7 +2,7 @@
 
 Sistema de Gestão de Eventos e Ingressos desenvolvido em **Laravel** com **MySQL** e **DaisyUI/Tailwind CSS**, como projeto avaliativo da disciplina de Programação Web III.
 
-## Sobre o Projeto
+##  Sobre o Projeto
 
 O Passaporte.io é uma plataforma MVP que conecta **Organizadores de eventos** e **Participantes**, oferecendo:
 
@@ -19,7 +19,7 @@ O Passaporte.io é uma plataforma MVP que conecta **Organizadores de eventos** e
 - **Banco de dados**: MySQL 8.x (via XAMPP)
 - **Servidor local**: XAMPP (Apache + MySQL)
 
-## 🚀 Passo a Passo de Instalação
+##  Passo a Passo de Instalação
 
 ### 1. Clonar o repositório
 
@@ -112,8 +112,16 @@ php artisan serve
 
 Acesse: **http://127.0.0.1:8000**
 
+## 🔑 Credenciais de Teste
 
-##  Estrutura do Banco de Dados (ERD)
+| Perfil | E-mail | Senha |
+|---|---|---|
+| Organizador | organizador@passaporte.io | password |
+| Participante | participante@passaporte.io | password |
+
+Essas contas já vêm criadas pelo `UserSeeder`, permitindo testar imediatamente a matriz de controle de acesso (ACL) sem necessidade de novos cadastros.
+
+## 🗂️ Estrutura do Banco de Dados (ERD)
 
 - **users**: id, name, email, password, role (`participante` | `organizador`)
 - **categories**: id, name
@@ -145,7 +153,7 @@ Acesse: **http://127.0.0.1:8000**
 - Listagem de eventos futuros com eager loading (RNF04 - sem N+1)
 - Filtro por categoria (RF13)
 - Tela de detalhes do evento (RF14)
-- Badge " Novidade" para eventos criados há menos de 3 horas
+- Badge "Novidade" para eventos criados há menos de 3 horas
 
 ##  Segurança
 
@@ -155,6 +163,10 @@ Acesse: **http://127.0.0.1:8000**
 - Uploads com nomes ofuscados via hash (RNF09)
 - Mensagens flash padronizadas com DaisyUI (`alert-success` / `alert-error`) (RNF10)
 - Preservação de dados em formulários com erro de validação (RNF11)
+
+## Projeto 
+
+Projeto acadêmico — Programação Web III
 
 ## 📸 Capturas de Tela
 
