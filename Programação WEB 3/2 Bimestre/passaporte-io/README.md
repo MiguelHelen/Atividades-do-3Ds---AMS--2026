@@ -24,8 +24,8 @@ O Passaporte.io é uma plataforma MVP que conecta **Organizadores de eventos** e
 ### 1. Clonar o repositório
 
 ```bash
-git clone <url-do-repositorio>
-cd passaporte-io
+git clone https://github.com/MiguelHelen/Atividades-do-3Ds---AMS--2026.git
+cd Atividades-do-3Ds---AMS--2026/Programação WEB 3/2 Bimestre/passaporte-io
 ```
 
 ### 2. Instalar dependências PHP
