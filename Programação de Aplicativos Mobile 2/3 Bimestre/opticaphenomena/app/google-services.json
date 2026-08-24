@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "767477504213",
+    "project_id": "opticafenomenos",
+    "storage_bucket": "opticafenomenos.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:767477504213:android:459925700bc83f7a2eaa5c",
+        "android_client_info": {
+          "package_name": "com.example.opticaphenomena"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVdmCc6mXIz8O1YGMXbyzMPo_8IqPVnKI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
