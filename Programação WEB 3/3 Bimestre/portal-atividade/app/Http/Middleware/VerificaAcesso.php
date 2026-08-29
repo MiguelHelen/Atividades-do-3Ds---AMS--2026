@@ -27,7 +27,7 @@ class VerificaAcesso
         $usuario = $email ? Usuario::where('email', $email)->first() : null;
 
         if ($usuario && $usuario->autorizado) {
-            // Acesso liberado: middleware repassa a mensagem para o Controller
+            
             $request->attributes->set('mensagem', 'Bem vindo ao portal');
             $request->attributes->set('usuario', $usuario);
 
@@ -35,7 +35,6 @@ class VerificaAcesso
         }
 
         // Acesso negado: middleware interrompe o fluxo e ja devolve a view
-        // com a mensagem de erro, sem chamar o Controller
         return response()->view('portal', [
             'mensagem'    => 'Seu acesso não foi autorizado.',
             'submensagem' => 'Entrar em contato com o administrador.',
